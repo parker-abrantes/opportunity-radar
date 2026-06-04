@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">OR</div>
+          <div>
+            <strong>Opportunity Radar</strong>
+            <span>Local-first career system</span>
+          </div>
+        </div>
+        <nav>
+          <button class="nav-item active">Radar Queue</button>
+          <button class="nav-item">Internship Pipeline</button>
+          <button class="nav-item">Travel Grants</button>
+          <button class="nav-item">Search Profile</button>
+        </nav>
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Local file link active</strong>
+            <span>Internship CSV connected</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>Opportunity Radar</h1>
+            <p>Review the strongest opportunities. Let the system keep the wide net.</p>
+          </div>
+          <button id="refreshButton" class="secondary-button">Refresh files</button>
+        </header>
+
+        <section class="metrics" id="metrics"></section>
+
+        <section class="toolbar">
+          <div id="filters" class="filters"></div>
+          <label class="search">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Organization, role, or location" />
+          </label>
+        </section>
+
+        <div class="workspace">
+          <section class="queue-panel">
+            <div class="section-heading">
+              <div>
+                <h2>Ranked discovery queue</h2>
+                <p>Verified items are actionable now; monitor items are high-value sources to keep watching.</p>
+              </div>
+              <span id="queueCount" class="quiet-label"></span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Score</th>
+                    <th>Organization and role</th>
+                    <th>Type</th>
+                    <th>Term</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="radarRows"></tbody>
+              </table>
+            </div>
+
+            <div class="pipeline">
+              <div class="section-heading compact">
+                <div>
+                  <h2>Current internship pipeline</h2>
+                  <p>Live data from your existing internship tracker.</p>
+                </div>
+                <span id="pipelineCount" class="quiet-label"></span>
+              </div>
+              <div id="pipelineRows" class="pipeline-rows"></div>
+            </div>
+
+            <div class="tracker-panel">
+              <div class="section-heading compact">
+                <div>
+                  <h2>Internship tracker front end</h2>
+                  <p>Status, next action, resume variant, and application links from the tracker CSV.</p>
+                </div>
+                <span id="trackerCount" class="quiet-label"></span>
+              </div>
+              <div class="tracker-grid" id="trackerRows"></div>
+            </div>
+
+            <div class="pipeline">
+              <div class="section-heading compact">
+                <div>
+                  <h2>Latest search run</h2>
+                  <p>Shows what I checked and how the radar changed.</p>
+                </div>
+              </div>
+              <div id="searchLogRows" class="search-log"></div>
+            </div>
+          </section>
+
+          <aside class="inspector" id="inspector"></aside>
+        </div>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>

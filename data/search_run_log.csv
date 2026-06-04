@@ -1,0 +1,2 @@
+Run_Date,Sources_Checked,Verified_Items,Monitor_Items,Summary,Next_Run_Focus
+2026-06-04,"Company career pages, national lab portals, conference grant pages, student research portals",3,2,Demo run seeded with representative opportunity types and ranking logic.,"Refresh live sources and replace sample rows with verified current postings."

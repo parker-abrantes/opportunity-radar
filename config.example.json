@@ -1,0 +1,5 @@
+{
+  "radarFile": "data/radar_opportunities.csv",
+  "searchLogFile": "data/search_run_log.csv",
+  "internshipFile": "data/internship_tracker.csv"
+}

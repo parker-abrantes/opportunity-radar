@@ -1,0 +1,9 @@
+node_modules/
+.env
+config.local.json
+*.log
+*.tmp
+*.bak
+data/*private*
+data/*backup*
+qa/
