@@ -16,6 +16,6 @@ I started building this because I care about opportunities across nuclear energy
 
 This is still a prototype, but it is already changing how I think about career systems: the goal is not to apply to everything. The goal is to build a calm, repeatable process for noticing the right things early and acting on them intentionally.
 
-Repo: [add GitHub link]
+Repo: https://github.com/parker-abrantes/opportunity-radar
 
 #students #internships #nuclearenergy #aerospace #productivity #technicalprogrammanagement #buildinpublic

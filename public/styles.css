@@ -670,10 +670,45 @@ tbody tr.selected {
   color: var(--text);
 }
 
+.tracker-note {
+  min-height: 18px;
+  margin-top: 10px;
+  color: var(--amber);
+  font-size: 11px;
+}
+
 .tracker-footer {
   align-items: center;
   justify-content: space-between;
   margin-top: 13px;
+}
+
+.tracker-apply-button {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid rgba(100, 227, 163, .32);
+  border-radius: 12px;
+  padding: 9px 11px;
+  color: #baffd7;
+  background:
+    linear-gradient(135deg, rgba(100, 227, 163, .16), rgba(66, 223, 194, .08)),
+    rgba(5, 12, 27, .45);
+  font-size: 11px;
+  font-weight: 820;
+}
+
+.tracker-apply-button:hover {
+  border-color: rgba(100, 227, 163, .58);
+  background:
+    linear-gradient(135deg, rgba(100, 227, 163, .22), rgba(66, 223, 194, .12)),
+    rgba(5, 12, 27, .5);
+}
+
+.tracker-apply-button:disabled {
+  color: var(--quiet);
+  border-color: rgba(148, 174, 218, .16);
+  background: rgba(36, 56, 85, .28);
+  cursor: not-allowed;
 }
 
 .search-log {

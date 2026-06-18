@@ -179,6 +179,30 @@ async function handleApi(request, response, pathname) {
     return sendJson(response, 200, { markdown });
   }
 
+  const internshipAppliedMatch = pathname.match(/^\/api\/internships\/([^/]+)\/applied$/);
+  if (request.method === "POST" && internshipAppliedMatch) {
+    const internshipCsv = readCsv(config.internshipFile);
+    const internship = internshipCsv.records.find((item) => item.Application_ID === internshipAppliedMatch[1]);
+
+    if (!internship) return sendJson(response, 404, { error: "Internship application not found" });
+
+    const body = await getBody(request);
+    const appliedDate = String(body.appliedDate || todayIso()).trim();
+    const nextAction = String(body.nextAction || "Watch for confirmation email or recruiter response").trim();
+    const nextActionDate = String(body.nextActionDate || appliedDate).trim();
+    const note = `Applied ${appliedDate}. Marked from Opportunity Radar dashboard.`;
+
+    internship.Status = "Applied";
+    internship.Stage = "Submitted";
+    internship.Date_Applied = appliedDate;
+    internship.Next_Action = nextAction;
+    internship.Next_Action_Date = nextActionDate;
+    internship.Notes = internship.Notes ? `${internship.Notes} ${note}` : note;
+
+    writeCsv(config.internshipFile, internshipCsv.headers, internshipCsv.records);
+    return sendJson(response, 200, { applicationId: internship.Application_ID, appliedDate });
+  }
+
   const approveMatch = pathname.match(/^\/api\/radar\/([^/]+)\/approve$/);
   if (request.method === "POST" && approveMatch) {
     const radarCsv = readCsv(config.radarFile);

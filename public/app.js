@@ -105,6 +105,7 @@ function renderInternshipTracker() {
 
   count.textContent = `${state.internships.length} tracked`;
   rows.innerHTML = state.internships.map((item) => {
+    const isApplied = String(item.Status || "").toLowerCase() === "applied";
     const link = item.Application_Link
       ? `<a href="${item.Application_Link}" target="_blank" rel="noreferrer">Open posting</a>`
       : `<span class="tracker-muted">No link</span>`;
@@ -129,13 +130,25 @@ function renderInternshipTracker() {
           <strong>Next</strong>
           <span>${item.Next_Action || "No next action set"}</span>
         </div>
+        <p class="tracker-note" id="tracker-note-${item.Application_ID}">
+          ${item.Date_Applied ? `Applied on ${item.Date_Applied}` : ""}
+        </p>
         <div class="tracker-footer">
           <span>${nextDate}</span>
           <span>${item.Best_Resume_Variant || "Resume TBD"}</span>
           ${link}
         </div>
+        <button class="tracker-apply-button" data-application-id="${item.Application_ID}" ${isApplied ? "disabled" : ""}>
+          ${isApplied ? "Already applied" : "Mark as applied"}
+        </button>
       </article>`;
   }).join("");
+
+  document.querySelectorAll(".tracker-apply-button").forEach((button) => {
+    if (!button.disabled) {
+      button.addEventListener("click", () => markInternshipApplied(button.dataset.applicationId));
+    }
+  });
 }
 
 function renderSearchLog() {
@@ -253,6 +266,35 @@ async function rejectOpportunity(id, reason) {
   }
   state.filter = "Verified";
   state.selectedId = null;
+  await load();
+}
+
+async function markInternshipApplied(id) {
+  const button = document.querySelector(`[data-application-id="${id}"]`);
+  const note = document.getElementById(`tracker-note-${id}`);
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Marking applied...";
+  }
+  if (note) note.textContent = "Updating application tracker...";
+
+  const response = await fetch(`/api/internships/${id}/applied`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    if (note) note.textContent = result.error;
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Mark as applied";
+    }
+    return;
+  }
+
+  if (note) note.textContent = `Applied on ${result.appliedDate}`;
   await load();
 }
 
