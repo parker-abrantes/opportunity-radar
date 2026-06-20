@@ -50,6 +50,33 @@ On Windows, you can also double-click:
 Launch Opportunity Radar.cmd
 ```
 
+## Run on Your Phone
+
+For same-Wi-Fi phone access, double-click:
+
+```text
+Launch Opportunity Radar Phone Mode.cmd
+```
+
+The launcher prints a phone URL like:
+
+```text
+http://192.168.x.x:4173
+```
+
+Open that URL from your phone while your laptop is awake and connected to the
+same Wi-Fi network.
+
+To install it like an app:
+
+- iPhone: open the phone URL in Safari, then Share -> Add to Home Screen.
+- Android: open the phone URL in Chrome, then menu -> Install app or Add to Home
+  screen.
+
+This repo includes PWA metadata, a manifest, icon, and service worker. A full
+installable PWA experience is most reliable after HTTPS deployment because
+mobile browsers restrict service workers on plain local-network HTTP.
+
 ## Personal Data
 
 This repository ships with sample CSVs only.

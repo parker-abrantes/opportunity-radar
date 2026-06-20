@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08111f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Opportunity Radar" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="Opportunity Radar tracks internships, fellowships, scholarships, travel grants, and career opportunities." />
     <title>Opportunity Radar</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/radar-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/radar-icon.svg" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -37,7 +46,10 @@
             <h1>Opportunity Radar</h1>
             <p>Review the strongest opportunities. Let the system keep the wide net.</p>
           </div>
-          <button id="refreshButton" class="secondary-button">Refresh files</button>
+          <div class="topbar-actions">
+            <button id="installButton" class="secondary-button install-button" hidden>Install app</button>
+            <button id="refreshButton" class="secondary-button">Refresh files</button>
+          </div>
         </header>
 
         <section class="metrics" id="metrics"></section>

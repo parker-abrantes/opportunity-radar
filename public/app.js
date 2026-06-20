@@ -8,6 +8,7 @@ const state = {
 };
 
 const filters = ["Verified", "Monitor", "Strong Fits", "Nuclear", "Systems", "Research", "Local Melbourne", "Travel Grants", "Rejected"];
+let deferredInstallPrompt = null;
 
 function scoreNumber(value) {
   return Number(value || 0);
@@ -322,4 +323,34 @@ document.getElementById("searchInput").addEventListener("input", (event) => {
   render();
 });
 document.getElementById("refreshButton").addEventListener("click", load);
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch((error) => {
+      console.warn("Service worker registration failed:", error);
+    });
+  });
+}
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  const installButton = document.getElementById("installButton");
+  if (installButton) installButton.hidden = false;
+});
+
+document.getElementById("installButton")?.addEventListener("click", async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  document.getElementById("installButton").hidden = true;
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  const installButton = document.getElementById("installButton");
+  if (installButton) installButton.hidden = true;
+});
+
 load();

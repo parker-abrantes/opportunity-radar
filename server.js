@@ -9,6 +9,7 @@ const DATA_DIR = path.join(ROOT, "data");
 const LOCAL_CONFIG_FILE = path.join(ROOT, "config.local.json");
 const PROFILE_FILE = path.join(ROOT, "opportunity_profile.md");
 const PORT = Number(process.env.PORT || 4173);
+const HOST = process.env.HOST || "127.0.0.1";
 
 const defaultConfig = {
   radarFile: path.join(DATA_DIR, "radar_opportunities.csv"),
@@ -264,8 +265,17 @@ function serveStatic(response, pathname) {
   }
 
   const extension = path.extname(resolved);
-  const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript" };
-  response.writeHead(200, { "Content-Type": `${types[extension] || "text/plain"}; charset=utf-8` });
+  const types = {
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "text/javascript",
+    ".webmanifest": "application/manifest+json",
+    ".json": "application/json",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+  };
+  const charset = [".png"].includes(extension) ? "" : "; charset=utf-8";
+  response.writeHead(200, { "Content-Type": `${types[extension] || "text/plain"}${charset}` });
   response.end(fs.readFileSync(resolved));
 }
 
@@ -279,6 +289,10 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(PORT, "127.0.0.1", () => {
-  console.log(`Opportunity Radar dashboard running at http://127.0.0.1:${PORT}`);
+server.listen(PORT, HOST, () => {
+  const displayHost = HOST === "0.0.0.0" ? "localhost" : HOST;
+  console.log(`Opportunity Radar dashboard running at http://${displayHost}:${PORT}`);
+  if (HOST === "0.0.0.0") {
+    console.log("Phone mode enabled: open this app from another device using this computer's local Wi-Fi IP address.");
+  }
 });

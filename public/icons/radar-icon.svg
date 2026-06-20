@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Opportunity Radar icon">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="90%">
+      <stop offset="0%" stop-color="#3dd6ff"/>
+      <stop offset="45%" stop-color="#1b3f8b"/>
+      <stop offset="100%" stop-color="#07111f"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#64e3a3" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#ffc05a" stop-opacity=".9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#9bdcff" stroke-opacity=".28" stroke-width="18"/>
+  <circle cx="256" cy="256" r="112" fill="none" stroke="#9bdcff" stroke-opacity=".26" stroke-width="14"/>
+  <circle cx="256" cy="256" r="52" fill="none" stroke="#f7fbff" stroke-opacity=".36" stroke-width="12"/>
+  <path d="M256 256 386 134a178 178 0 0 1 48 130Z" fill="url(#beam)" opacity=".72"/>
+  <line x1="256" y1="256" x2="408" y2="152" stroke="#f7fbff" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="18" fill="#ffffff"/>
+  <path d="M132 374c28 26 71 42 124 42 54 0 97-16 125-42" fill="none" stroke="#64e3a3" stroke-width="16" stroke-linecap="round"/>
+</svg>
